@@ -1,0 +1,32 @@
+Arguments: 
+  /home/lxmint/.nvm/versions/node/v18.5.0/bin/node /home/lxmint/.node/corepack/yarn/1.22.19/bin/yarn.js add -D hardhat
+
+PATH: 
+  /home/lxmint/.local/share/pnpm:/home/lxmint/.local/bin:/home/lxmint/.nvm/versions/node/v18.5.0/bin:/home/lxmint/.local/share/pnpm:/home/lxmint/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.5.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: read ECONNRESET
+      at TLSWrap.onStreamRead (node:internal/stream_base_commons:217:20)
+
+npm manifest: 
+  {
+    "name": "hardhat",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
