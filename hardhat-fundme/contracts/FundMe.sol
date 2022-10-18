@@ -1,6 +1,5 @@
-
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.8;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./PriceConverter.sol";
@@ -30,7 +29,11 @@ contract FundMe {
         funders.push(msg.sender);
     }
     
-
+    // function getVersion() public view returns (uint256){
+    //     // ETH/USD price feed address of Goerli Network.
+    //     AggregatorV3Interface priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
+    //     return priceFeed.version();
+    // }
     
     modifier onlyOwner {
         // require(msg.sender == owner);
