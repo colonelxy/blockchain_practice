@@ -26,7 +26,7 @@ library PriceConverter {
         uint256 ethAmount,
         AggregatorV3Interface priceFeed
     ) internal view returns (uint256) {
-        uint256 ethPrice = getPrice();
+        uint256 ethPrice = getPrice(priceFeed);
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
         // or (Both will do the same thing)
         // uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1e18; // 1 * 10 ** 18 == 1000000000000000000

@@ -5,7 +5,7 @@ const { verify } = require("../utils/verify")
 module.exports = async ({ getNamedAccounts, deployments }) => {
     const { deploy, log, get } = deployments
     const { deployer } = await getNamedAccounts()
-    const chainId = network.config.chainId
+    const chainId = networkConfig.chainId
 
     // const ethUsdPriceFeedAddress=networkConfig[chainId]["ethUsdPriceFeed"]
     let ethUsdPriceFeedAddress
@@ -13,7 +13,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
         ethUsdPriceFeedAddress = ethUsdAggregator.address
     } else {
-        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+        ethUsdPriceFeedAddress = network[chainId]["ethUsdPriceFeed"]
     }
 
     const args = [ethUsdPriceFeedAddress]
@@ -22,16 +22,17 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         from: deployer,
         args: args,
         log: true,
-        waitConfirmations: networkConfig.config.blockConfirmations || 1
+        waitConfirmations:
+            network[networkConfig[chainId][0]].blockConfirmations || 1
     })
 
     if (
         !developmentChains.includes(network.name) &&
         process.env.ETHERSCAN_API_KEY
     ) {
-        await verify(FundMe.address, args)
+        await verify(fundMe.address, args)
     }
-    log("--------------------------------------")
+    log("_______________________________________")
 }
 
-module.exports.tags = ["all", "mocks"]
+module.exports.tags = ["all", "fundMe"]

@@ -11,8 +11,8 @@ require("@nomiclabs/hardhat-solhint")
 
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "key"
-COIN_MARKET_CAP = process.env.COIN_MARKET_CAP
-PRIVATE_KEY_PASSWORD = process.env.PRIVATE_KEY_PASSWORD
+const COIN_MARKET_CAP = process.env.COIN_MARKET_CAP
+const METAMASK_PRIVATE_KEY = process.env.METAMASK_PRIVATE_KEY
 
 module.exports = {
     // solidity: "0.8.17",
@@ -35,15 +35,16 @@ module.exports = {
         enabled: true,
         outputFile: "gas-report.txt",
         noColors: true,
-        currency: "KES",
+        currency: "USD",
+        coinmarketcap: COIN_MARKET_CAP,
         token: "MATIC"
     },
 
     defaultNetwork: "hardhat",
     networks: {
         goerli: {
-            url: process.env.GOERLI_URL || "",
-            accounts: [PRIVATE_KEY_PASSWORD],
+            url: GOERLI_RPC_URL || "",
+            accounts: [METAMASK_PRIVATE_KEY],
             chainId: 5,
             blockConfirmations: 6
         }
