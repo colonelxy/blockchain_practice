@@ -47,5 +47,28 @@ describe("FundMe", async function() {
         this.beforeEach(async () => {
             await fundMe.fund({ value: sendValue })
         })
+        it("withdraws ETH from a single funder", async () => {
+            // Arrange 
+            const startingFundMeBalance = await fundMe.provider.getBalance(fundMe.address)
+            const startingDeployerBalance = await fundMe.provider.getBalance(deployer)
+
+            // Action 
+            const transactionResponse = await fundMe.withdraw()
+            const transactionReceipt=await transactionResponse.wait(1)
+
+            // GasCost 
+            const {gasUsed, effectiveGasPrice} = transactionReceipt
+            const gasCost = gasUsed.mul(effectiveGasPrice)
+
+
+            const endingFundMeBalance=await fundMe.provider.getBalance(fundMe.address)
+            const endingDeployerBalance = await fundMe.provider.getBalance(deployer)
+
+
+            // Assert 
+            assert.equal(endingFundMeBalance, 0)
+            assert.equal(startingFundMeBalance.add(startingDeployerBalance).toString(), endingDeployerBalance.add(gasCost).toString())
+        }
+        
     })
 })

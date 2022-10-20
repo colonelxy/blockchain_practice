@@ -3,9 +3,9 @@ const network = require("hardhat")
 const { verify } = require("../utils/verify")
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
-    const { deploy, log, get } = deployments
+    const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
-    const chainId = networkConfig.chainId
+    const chainId = network.config.chainId
 
     // const ethUsdPriceFeedAddress=networkConfig[chainId]["ethUsdPriceFeed"]
     let ethUsdPriceFeedAddress
@@ -13,7 +13,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         const ethUsdAggregator = await deployments.get("MockV3Aggregator")
         ethUsdPriceFeedAddress = ethUsdAggregator.address
     } else {
-        ethUsdPriceFeedAddress = network[chainId]["ethUsdPriceFeed"]
+        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
     }
 
     const args = [ethUsdPriceFeedAddress]
